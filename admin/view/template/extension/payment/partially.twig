@@ -1,0 +1,176 @@
+{{ header }}{{ column_left }}
+<div id="content">
+  <div class="page-header">
+    <div class="container-fluid">
+      <div class="pull-right">
+        <button type="submit" form="form-payment" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa fa-save"></i></button>
+        <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a></div>
+      <h1>{{ heading_title }}</h1>
+      <ul class="breadcrumb">
+        {% for breadcrumb in breadcrumbs %}
+        <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  <div class="container-fluid">
+    {% if error_warning %}
+    <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+    {% endif %}
+    {% if success %}
+    <div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> {{ success }}
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+    {% endif %}
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-pencil"></i> {{ text_edit }}</h3>
+      </div>
+      <div class="panel-body">
+
+        <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-payment" class="form-horizontal">
+          <ul class="nav nav-tabs">
+            <li class="active"><a href="#tab-gateway" data-toggle="tab">{{ tab_gateway }}</a></li>
+            <li><a href="#tab-widget" data-toggle="tab">{{ tab_widget }}</a></li>
+          </ul>
+          <div class="tab-content">
+            <div class="tab-pane active" id="tab-gateway">
+              <p>{{partially_overview}}</p>
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-status">{{ label_status }}</label>
+                <div class="col-sm-10">
+                  <select name="payment_partially_status" id="input-status" class="form-control">
+                    {% if payment_partially_status %}
+                    <option value="1" selected="selected">{{ text_enabled }}</option>
+                    <option value="0">{{ text_disabled }}</option>
+                    {% else %}
+                    <option value="1">{{ text_enabled }}</option>
+                    <option value="0" selected="selected">{{ text_disabled }}</option>
+                    {% endif %}
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="entry-api_key"><span data-toggle="tooltip" title="{{ help_api_key }}">{{ label_api_key }}</span></label>
+                <div class="col-sm-10">
+                  <input type="text" name="payment_partially_api_key" value="{{ payment_partially_api_key }}" id="entry-api_key" class="form-control"/>
+                  {% if error_api_key %}
+                  <div class="text-danger">{{ error_api_key }}</div>
+                  {% endif %}
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-offer"><span data-toggle="tooltip" title="{{ help_offer }}">{{ label_offer }}</span></label>
+                <div class="col-sm-10">
+                  {% if offers %}
+                  <select id="input-offer" name="payment_partially_offer" class="form-control">
+                    <option value="">{{ label_not_set }}</option>
+                    {% for o in offers %}
+                    <option value="{{o.id}}"{% if o.id == payment_partially_offer %} selected{% endif %}>{{o.name}}</option>
+                    {% endfor %}
+                  </select>
+                  {% else %}
+                  <input type="text" name="payment_partially_offer" value="{{ payment_partially_offer }}" id="input-offer" class="form-control"/>
+                  {% endif %}
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-order_status_id"><span data-toggle="tooltip" title="{{ help_order_status }}">{{ label_order_status }}</span></label>
+                <div class="col-sm-10">
+                  <select name="payment_partially_order_status_id" id="input-order_status_id" class="form-control">
+                    {% for order_status in order_statuses %}
+                    {% if order_status.order_status_id == payment_partially_order_status_id %}
+                    <option value="{{ order_status.order_status_id }}" selected="selected">{{ order_status.name }}</option>
+                    {% else %}
+                    <option value="{{ order_status.order_status_id }}">{{ order_status.name }}</option>
+                    {% endif %}
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="entry-min_total"><span data-toggle="tooltip" title="{{ help_min_total }}">{{ label_min_total }}</span></label>
+                <div class="col-sm-10">
+                  <input type="text" name="payment_partially_min_total" value="{{ payment_partially_min_total }}" id="entry-min_total" class="form-control"/>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-sort-order">{{ label_sort_order }}</label>
+                <div class="col-sm-10">
+                  <input type="text" name="payment_partially_sort_order" value="{{ payment_partially_sort_order }}" id="input-sort-order" class="form-control"/>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane" id="tab-widget">
+              <p>{{widget_overview}}</p>
+
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-widget_style">{{ label_widget_style }}</label>
+                <div class="col-sm-10">
+                  <select id="input-widget_style" name="payment_partially_widget_style" class="form-control">
+                    <option value="stacked">stacked</option>
+                    <option value="thin"{% if payment_partially_widget_style == 'thin' %} selected{% endif %}>thin</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-widget_title">{{ label_widget_title }}</label>
+                <div class="col-sm-10">
+                  <input type="text" name="payment_partially_widget_title" value="{{ payment_partially_widget_title }}" id="input-widget_title" class="form-control"/>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-widget_body">{{ label_widget_body }}</label>
+                <div class="col-sm-10">
+                  <input type="text" name="payment_partially_widget_body" value="{{ payment_partially_widget_body }}" id="input-widget_body" class="form-control"/>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-widget_trigger_text">{{ label_widget_trigger_text }}</label>
+                <div class="col-sm-10">
+                  <input type="text" name="payment_partially_widget_trigger_text" value="{{ payment_partially_widget_trigger_text }}" id="input-widget_trigger_text" class="form-control"/>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-widget_popup_details">{{ label_widget_popup_details }}</label>
+                <div class="col-sm-10">
+                  <textarea name="payment_partially_widget_popup_details" id="input-widget_popup_details" class="form-control">{{payment_partially_widget_popup_details}}</textarea>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-checkout_button_enabled">{{ label_widget_checkout_enabled }}</label>
+                <div class="col-sm-10">
+                  <select name="payment_partially_widget_checkout_enabled" id="input-checkout_button_enabled" class="form-control">
+                    {% if payment_partially_widget_checkout_enabled %}
+                    <option value="1" selected="selected">{{ text_enabled }}</option>
+                    <option value="0">{{ text_disabled }}</option>
+                    {% else %}
+                    <option value="1">{{ text_enabled }}</option>
+                    <option value="0" selected="selected">{{ text_disabled }}</option>
+                    {% endif %}
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-widget_checkout_text">{{ label_widget_checkout_button_text }}</label>
+                <div class="col-sm-10">
+                  <input type="text" name="payment_partially_widget_checkout_text" id="input-widget_checkout_text" class="form-control" value="{{payment_partially_widget_checkout_text}}" />
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{{ footer }}

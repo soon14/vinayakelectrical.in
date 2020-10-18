@@ -1,0 +1,10 @@
+<form action="{{  continue }}" method="POST">
+    {% for k, v in posted  %}
+        <input type="hidden" name="{{ k }}" value="{{ v }}">
+    {% endfor %}
+    <div class="buttons">
+        <div class="pull-right">
+            <input type="submit" value="{{ button_confirm }}" id="button-submit" data-loading-text="{{ text_loading }}" class="btn btn-primary" />
+        </div>
+    </div>
+</form>

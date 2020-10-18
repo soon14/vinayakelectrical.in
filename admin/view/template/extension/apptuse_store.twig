@@ -1,0 +1,102 @@
+{{ header }}{{ column_left }}
+
+<div id="content">
+  <div class="page-header">
+    <div class="container-fluid">
+      <div class="pull-right">
+        {# <a href="{{ download }}" data-toggle="tooltip" title="{{ button_download }}" class="btn btn-primary"><i class="fa fa-download"></i></a>
+        <a onclick="confirm('{{ text_confirm }}') ? location.href='{{ clear }}' : false;" data-toggle="tooltip" title="{{ button_clear }}" class="btn btn-danger"><i class="fa fa-eraser"></i></a> #}
+      </div>
+      <h1>{{ heading_title }}</h1>
+      <ul class="breadcrumb">
+        {% for breadcrumb in breadcrumbs %}
+        <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  <div class="container-fluid">
+    {{ "something : ".error_warning }}
+    {% if error_warning %}
+    <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+    {% endif %}
+    {% if success %}
+    <div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> {{ success }}
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+    {% endif %}
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Store List</h3>
+      </div>
+      <div class="panel-body">
+        {# <textarea wrap="off" rows="15" readonly class="form-control">
+          test ign ahdioehi
+        </textarea> #}
+        <div class="table-responsive">
+          <table class="table table-bordered table-hover" width="100%" style="  border: 1px solid #cecece;     border-collapse: collapse; ">
+            <tr>
+                <th class="app_th">
+                  #id
+                </th>
+                <th class="app_th">
+                  Store Name
+                </th>
+                <th class="app_th text-right">
+                  Action
+                </th>
+            </tr>
+            
+            {% for store in stores %}
+              
+              <tr>
+                <td class="app_td">{{ store['store_id'] }}</td>
+                <td class="app_td align-left">{{ store['name'] }}</td>
+                <td class="app_td text-right">
+
+                  {% if (store['token'] is empty) and (store['status'] == 0 )  %}
+
+                      <a href="{{ store['connect_url'] }}" data-toggle="tooltip" title="Connect to Apptuse service to create your mobile app for '{{ store['name'] }}' store" class="btn btn-primary" data-original-title="Connect "><i class="fa fa-plug inline"></i> Connect</a>
+
+                  {% else %}
+
+                         <a target="_blank" href="https://app.apptuse.com/plugin-login-url?token={{ store['token'] }}&email={{ store['email'] }}" data-toggle="tooltip" title="Manage your mobile app" class="btn btn-success" data-original-title="Manage "><i class="fa fa-cogs inline"></i> Manage</a>
+                  {% endif %}
+
+                </td>
+              </tr>
+            {% endfor %}
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+
+window.onload = function(){
+
+   var ths  = document.getElementsByClassName('app_th'); 
+   for (var i = 0; i < ths.length; i++) {
+     ths[i].style.border = "1px solid #cecece";
+     ths[i].style.padding = "10px"; 
+     ths[i].style.background = "#828282";
+     ths[i].style.color = "white";
+   } 
+
+
+
+   var tds  = document.getElementsByClassName('app_td'); 
+   for (var i = 0; i < tds.length; i++) {
+     tds[i].style.border = "1px solid #cecece";
+     //tds[i].style.textAlign = "center";
+     tds[i].style.padding = "10px";
+   } 
+
+}
+
+
+</script>
+{{ footer }}

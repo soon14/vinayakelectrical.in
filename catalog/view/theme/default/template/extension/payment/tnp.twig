@@ -1,0 +1,27 @@
+<form action="{{ action }}" method="POST">
+
+	<input type="hidden" name="api_key" value="{{ api_key }}">
+    <input type="hidden" name="amount" value="{{ amount }}">
+    <input type="hidden" name="email" value="{{ email }}">
+    <input type="hidden" name="name" value="{{ name }}">
+    <input type="hidden" name="phone" value="{{ phone }}">
+	<input type="hidden" name="address_line_1" value="{{ address_line_1 }}">
+	<input type="hidden" name="address_line_2" value="{{ address_line_2 }}">
+	<input type="hidden" name="order_id" value="{{ order_id }}">
+	<input type="hidden" name="currency" value="{{ currency }}">
+	<input type="hidden" name="description" value="{{ description }}">
+	<input type="hidden" name="city" value="{{ city }}">
+	<input type="hidden" name="state" value="{{ state }}">
+	<input type="hidden" name="zip_code" value="{{ zip_code }}">
+	<input type="hidden" name="country" value="{{ country }}" >
+	<input type="hidden" name="return_url" value="{{ return_url }}">
+	<input type="hidden" name="mode" value="{{ mode }}">
+	<input type="hidden" name="hash" value="{{ hash }}">
+    <input type="hidden" name="udf1" value="{{ udf1 }}">
+
+  <div class="buttons">
+    <div class="right">
+      <input type="submit" value="{{ button_confirm }}" class="button" />
+    </div>
+  </div>
+</form>

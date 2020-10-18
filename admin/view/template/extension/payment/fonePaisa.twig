@@ -1,0 +1,122 @@
+{{ header }}{{ column_left }}
+<div id="content">
+  <div class="page-header">
+    <div class="container-fluid">
+      <div class="pull-right">
+        <button type="submit" form="form-fonePaisa" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa fa-check-circle"></i></button>
+        <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a></div>
+      <h1>{{ heading_title }}</h1>
+      <ul class="breadcrumb">
+        {% for breadcrumb in breadcrumbs %}
+        <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  <div class="container-fluid">
+    {% if error_warning %}
+    <div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+    {% endif %}
+    <div class="panel panel-default">
+      
+      <div class="panel-body">
+        <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-fonePaisa" class="form-horizontal">
+          <div class="form-group required">
+            <label class="control-label col-sm-3" for="payment_fonePaisa_merchant_id"><span data-toggle="tooltip" title="{{ entry_id_help }}">{{ entry_id }}</span></label>
+            <div class="col-sm-9"><input type="text" name="payment_fonePaisa_id" value="{{ payment_fonePaisa_id }}" class="form-control"/>
+              {% if error_id %}
+              <span class="error">{{ error_id }}</span>
+              {% endif %}
+            </div>
+          </div>
+          <div class="form-group required">
+            <label class="control-label col-sm-3" for="payment_fonePaisa_merchant"><span data-toggle="tooltip" title="{{ entry_merchant_help }}">{{ entry_merchant }}</span></label>
+            <div class="col-sm-9"><input type="text" name="payment_fonePaisa_merchant" value="{{ payment_fonePaisa_merchant }}" class="form-control"/>
+              {% if error_merchant %}
+              <span class="error">{{ error_merchant }}</span>
+              {% endif %}
+            </div>
+          </div>
+		  <div class="form-group required">
+            <label class="control-label col-sm-3" for="input-merchant-display"><span data-toggle="tooltip" title="{{ entry_merchant_display_help }}">{{ entry_merchant_display }}</span></label>
+            <div class="col-sm-9"><input type="text" name="payment_fonePaisa_merchant_display" value="{{ payment_fonePaisa_merchant_display }}" class="form-control"/>
+              {% if error_merchant_display %}
+              <span class="error">{{ error_merchant_display }}</span>
+              {% endif %}
+            </div>
+          </div>
+		  <div class="form-group required">
+            <label class="control-label col-sm-3" for="payment_fonePaisa_api"><span data-toggle="tooltip" title="{{ entry_merchantapi_help }}">{{ entry_merchantapi }}</span></label>
+            <div class="col-sm-9"><input type="text" name="payment_fonePaisa_api" value="{{ payment_fonePaisa_api }}" class="form-control"/>
+              {% if error_api %}
+              <span class="error">{{ error_api }}</span>
+              {% endif %}
+            </div>
+          </div>
+		  <div class="form-group required">
+            <label class="control-label col-sm-3" for="payment_fonePaisa_key"><span data-toggle="tooltip" title="{{ entry_merchantkey_help }}">{{ entry_merchantkey }}</span></label>
+            <div class="col-sm-9"><input type="text" name="payment_fonePaisa_key" value="{{ payment_fonePaisa_key }}" class="form-control"/>
+              {% if error_key %}
+              <span class="error">{{ error_key }}</span>
+              {% endif %}
+            </div>
+          </div>
+		  <div class="form-group required">
+            <label class="control-label col-sm-3" for="payment_fonePaisa_pub_key"><span data-toggle="tooltip" title="{{ entry_merchantpubkey_help }}">{{ entry_merchantpubkey }}</span></label>
+            <div class="col-sm-9"><input type="text" name="payment_fonePaisa_pub_key" value="{{ payment_fonePaisa_pub_key }}" class="form-control"/>
+              {% if error_pub_key %}
+              <span class="error">{{ error_pub_key }}</span>
+              {% endif %}
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-3" for="payment_fonePaisa_sort_order">{{ entry_sort_order }}</label>
+            <div class="col-sm-9"><input type="text" name="payment_fonePaisa_sort_order" value="{{ payment_fonePaisa_sort_order }}" class="form-control"/>
+            </div>
+          </div>
+          <div class="form-group required">
+            <label class="control-label col-sm-3" for="payment_fonePaisa_environment"><span data-toggle="tooltip" title="{{ entry_environment_help }}">{{ entry_environment }}</span></label>
+            <div class="col-sm-9"><select name="payment_fonePaisa_environment" class="form-control">
+                    {% if payment_fonePaisa_environment == 'P' %}
+                    <option value="P" selected="selected">{{ text_env_production }}</option>
+                    <option value="T">{{ text_env_test }}</option>
+                    {% else %}
+                    <option value="P">{{ text_env_production }}</option>
+                    <option value="T" selected="selected">{{ text_env_test }}</option>
+                    {% endif %}
+                  </select></div>
+          </div>
+		  <div class="form-group required">
+            <label class="control-label col-sm-3" for="payment_fonePaisa_order_status_id"><span data-toggle="tooltip" title="{{ entry_order_status_help }}">{{ entry_order_status }}</label>
+            <div class="col-sm-9"><select name="payment_fonePaisa_order_status_id" class="form-control">
+              {% for order_status in order_statuses %}
+                {% if order_status.order_status_id == payment_fonePaisa_order_status_id %}
+                <option value="{{ order_status.order_status_id }}" selected="selected">{{ order_status.name }}</option>
+                {% else %}
+                <option value="{{ order_status.order_status_id }}">{{ order_status.name }}</option>
+                {% endif %}
+              {% endfor %}
+              </select></div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-3" for="payment_fonePaisa_status">{{ entry_status }}</label>
+            <div class="col-sm-9"><select name="payment_fonePaisa_status" class="form-control">
+            {{ payment_fonePaisa_status }}
+                {% if payment_fonePaisa_status %}
+                <option value="1" selected="selected">{{ text_enabled }}</option>
+                <option value="0">{{ text_disabled }}</option>
+                {% else %}
+                <option value="1">{{ text_enabled }}</option>
+                <option value="0" selected="selected">{{ text_disabled }}</option>
+                {% endif %}
+              </select></div>
+          </div>
+		  
+		  </form>
+      </div>
+    </div>
+  </div>
+</div>
+{{ footer }}

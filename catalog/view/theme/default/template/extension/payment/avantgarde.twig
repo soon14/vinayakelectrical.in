@@ -1,0 +1,23 @@
+{% if error !="" %}
+	{{ error }}
+	
+{% else %}
+
+<form action="{{ action }}" method="POST">
+	<input type="hidden" name="me_id" value="{{ me_id }}" />
+	<input type="hidden" name="txn_details" value="{{ txn_details }}" />
+	<input type="hidden" name="pg_details" value="{{ pg_details }}" />
+	<input type="hidden" name="card_details" value="{{ card_details }}" />
+	<input type="hidden" name="cust_details" value="{{ cust_details }}" />
+	<input type="hidden" name="bill_details" value="{{ bill_details }}" />
+	<input type="hidden" name="ship_details" value="{{ ship_details }}" />
+	<input type="hidden" name="item_details" value="{{ item_details }}" />
+	<input type="hidden" name="other_details" value="{{ other_details }}" />
+	
+	<div class="buttons">
+	<div class="right">
+	    <input type="submit" value="{{ button_confirm }}" class="button" />
+	</div>
+	</div>
+</form>
+{% endif %}

@@ -1,0 +1,37 @@
+[30-Aug-2020 18:49:31 UTC] PHP Fatal error:  Uncaught Exception: Error: <br />Error No:  in /home/kasturic/public_html/vinayakelectrical.in/system/library/db/mysqli.php:10
+Stack trace:
+#0 /home/kasturic/public_html/vinayakelectrical.in/system/library/db.php(31): DB\MySQLi->__construct('localhost', 'kasturic_kastur...', 'Kasturi12#$', 'kasturic_vinaya...', '3306')
+#1 /home/kasturic/public_html/vinayakelectrical.in/system/framework.php(80): DB->__construct('mysqli', 'localhost', 'kasturic_kastur...', 'Kasturi12#$', 'kasturic_vinaya...', '3306')
+#2 /home/kasturic/public_html/vinayakelectrical.in/system/startup.php(104): require_once('/home/kasturic/...')
+#3 /home/kasturic/public_html/vinayakelectrical.in/index.php(37): start('catalog')
+#4 {main}
+  thrown in /home/kasturic/public_html/vinayakelectrical.in/system/library/db/mysqli.php on line 10
+[30-Aug-2020 18:49:53 UTC] PHP Fatal error:  Uncaught Exception: Error: <br />Error No:  in /home/kasturic/public_html/vinayakelectrical.in/system/library/db/mysqli.php:10
+Stack trace:
+#0 /home/kasturic/public_html/vinayakelectrical.in/system/library/db.php(31): DB\MySQLi->__construct('localhost', 'kasturic_kastur...', 'Kasturi12#$', 'kasturic_vinaya...', '3306')
+#1 /home/kasturic/public_html/vinayakelectrical.in/system/framework.php(80): DB->__construct('mysqli', 'localhost', 'kasturic_kastur...', 'Kasturi12#$', 'kasturic_vinaya...', '3306')
+#2 /home/kasturic/public_html/vinayakelectrical.in/system/startup.php(104): require_once('/home/kasturic/...')
+#3 /home/kasturic/public_html/vinayakelectrical.in/index.php(37): start('catalog')
+#4 {main}
+  thrown in /home/kasturic/public_html/vinayakelectrical.in/system/library/db/mysqli.php on line 10
+[18-Sep-2020 18:01:11 UTC] PHP Warning:  require_once(/home/kasturic/public_html/vinayakelectrical.in/system/startup.php): failed to open stream: No such file or directory in /home/kasturic/public_html/Websites/vinayakelectrical.in/index.php on line 33
+[18-Sep-2020 18:01:11 UTC] PHP Fatal error:  require_once(): Failed opening required '/home/kasturic/public_html/vinayakelectrical.in/system/startup.php' (include_path='.:/opt/alt/php72/usr/share/pear') in /home/kasturic/public_html/Websites/vinayakelectrical.in/index.php on line 33
+[18-Sep-2020 18:02:08 UTC] PHP Warning:  fopen(/home/kasturic/public_html/Websites/storage/logs/error.log): failed to open stream: No such file or directory in /home/kasturic/public_html/Websites/vinayakelectrical.in/system/library/log.php on line 22
+[18-Sep-2020 18:02:08 UTC] PHP Warning:  fwrite() expects parameter 1 to be resource, boolean given in /home/kasturic/public_html/Websites/vinayakelectrical.in/system/library/log.php on line 31
+[18-Sep-2020 18:02:08 UTC] PHP Warning:  fwrite() expects parameter 1 to be resource, boolean given in /home/kasturic/public_html/Websites/vinayakelectrical.in/system/library/log.php on line 31
+[18-Sep-2020 18:02:08 UTC] PHP Warning:  fwrite() expects parameter 1 to be resource, boolean given in /home/kasturic/public_html/Websites/vinayakelectrical.in/system/library/log.php on line 31
+[18-Sep-2020 18:02:08 UTC] PHP Warning:  fwrite() expects parameter 1 to be resource, boolean given in /home/kasturic/public_html/Websites/vinayakelectrical.in/system/library/log.php on line 31
+[18-Sep-2020 18:02:08 UTC] PHP Warning:  fwrite() expects parameter 1 to be resource, boolean given in /home/kasturic/public_html/Websites/vinayakelectrical.in/system/library/log.php on line 31
+[18-Sep-2020 18:02:08 UTC] PHP Warning:  fwrite() expects parameter 1 to be resource, boolean given in /home/kasturic/public_html/Websites/vinayakelectrical.in/system/library/log.php on line 31
+[18-Sep-2020 18:02:08 UTC] PHP Warning:  fwrite() expects parameter 1 to be resource, boolean given in /home/kasturic/public_html/Websites/vinayakelectrical.in/system/library/log.php on line 31
+[18-Sep-2020 18:02:08 UTC] PHP Warning:  fwrite() expects parameter 1 to be resource, boolean given in /home/kasturic/public_html/Websites/vinayakelectrical.in/system/library/log.php on line 31
+[18-Sep-2020 18:02:08 UTC] PHP Warning:  fwrite() expects parameter 1 to be resource, boolean given in /home/kasturic/public_html/Websites/vinayakelectrical.in/system/library/log.php on line 31
+[18-Sep-2020 18:02:08 UTC] PHP Warning:  fwrite() expects parameter 1 to be resource, boolean given in /home/kasturic/public_html/Websites/vinayakelectrical.in/system/library/log.php on line 31
+[18-Sep-2020 18:02:08 UTC] PHP Warning:  fwrite() expects parameter 1 to be resource, boolean given in /home/kasturic/public_html/Websites/vinayakelectrical.in/system/library/log.php on line 31
+[18-Sep-2020 18:02:08 UTC] PHP Warning:  fwrite() expects parameter 1 to be resource, boolean given in /home/kasturic/public_html/Websites/vinayakelectrical.in/system/library/log.php on line 31
+[18-Sep-2020 18:02:08 UTC] PHP Warning:  fwrite() expects parameter 1 to be resource, boolean given in /home/kasturic/public_html/Websites/vinayakelectrical.in/system/library/log.php on line 31
+[18-Sep-2020 18:02:08 UTC] PHP Warning:  fwrite() expects parameter 1 to be resource, boolean given in /home/kasturic/public_html/Websites/vinayakelectrical.in/system/library/log.php on line 31
+[18-Sep-2020 18:02:08 UTC] PHP Warning:  fwrite() expects parameter 1 to be resource, boolean given in /home/kasturic/public_html/Websites/vinayakelectrical.in/system/library/log.php on line 31
+[18-Sep-2020 18:02:08 UTC] PHP Warning:  fwrite() expects parameter 1 to be resource, boolean given in /home/kasturic/public_html/Websites/vinayakelectrical.in/system/library/log.php on line 31
+[18-Sep-2020 18:02:08 UTC] PHP Warning:  fwrite() expects parameter 1 to be resource, boolean given in /home/kasturic/public_html/Websites/vinayakelectrical.in/system/library/log.php on line 31
+[18-Sep-2020 18:02:08 UTC] PHP Warning:  fwrite() expects parameter 1 to be resource, boolean given in /home/kasturic/public_html/Websites/vinayakelectrical.in/system/library/log.php on line 31

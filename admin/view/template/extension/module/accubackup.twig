@@ -1,0 +1,183 @@
+{{ header }}{{ column_left }}
+<div id="content">
+    <div class="page-header">
+        <div class="container-fluid">
+            <h1>{{ heading_title }}</h1>
+            <ul class="breadcrumb">
+                {% for breadcrumb in breadcrumbs %}
+                    <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+                    {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="container-fluid">
+        {% if error_warning %}
+            <div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+            </div>
+        {% endif %}
+        {% if success %}
+            <div class="alert alert-success slideUp"><i class="fa fa-check-circle"></i> {{ success }}
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+            </div>
+        {% endif %}
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-list"></i>&nbsp;<span style="vertical-align:middle;font-weight:bold;">Extension settings</span></h3>
+            </div>
+            <div class="panel-body">
+                <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-account" class="form-horizontal">
+                    <div class="tabbable">
+                        <div class="tab-navigation form-inline">
+                            <ul class="nav nav-tabs menuTabs">
+                                <li class="active"><a href="#tab-settings" data-toggle="tab" class="active"><i class="fa fa-cog"></i>&nbsp;{{ tab_settings|upper }}</a></li>
+                                <li><a href="#tab-backup" data-toggle="tab"><i class="fa fa-list-alt"></i>&nbsp;{{ tab_backup|upper }}</a></li>
+                                <li><a href="#tab-term" data-toggle="tab"><i class="fa fa-file-text"></i>&nbsp;{{ tab_term|upper }}</a></li>
+                            </ul>
+                            <div class="tab-buttons">
+                                <button type="submit" class="btn btn-success save-changes"><i class="fa fa-save"></i>&nbsp;{{button_save}}</button>
+                                <a onclick="location = '{{ cancel }}'" class="btn btn-warning"><i class="fa fa-times-circle"></i>&nbsp;{{button_cancel}}</a>
+                            </div> 
+                        </div>
+                        <div class="tab-content">
+                            <div id="tab-settings" class="tab-pane active">
+                                <div class="alert alert-info">{{ text_message_general_tab }}</div>
+                                {% if metaData.Enabled == 'yes'%}
+                                    <div class="panel panel-info">
+                                        <h4 class="panel-heading">{{ text_schedule }}</h4>
+                                        <div class="panel-body">
+                                            <ul>
+                                                {% if metaData.nextSchedule %}
+                                                    <li>
+                                                        <strong>{{ text_next_schedule }}</strong>&nbsp;&nbsp;<i>{{ metaData.nextSchedule|date("l dS \o\f F Y h:i A", timezone) }}</i>
+                                                    </li>
+                                                {% endif %}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                {% endif %}
+
+                                <div class="form-group required">
+                                    <label class="col-sm-2 control-label">{{ entry_status }}</label>
+                                    <div class="col-sm-5">
+                                        <select name="accubackup[Enabled]" class="form-control">
+                                            {% if metaData.Enabled == 'yes' %}
+                                                <option value="yes" selected="selected">{{ text_enabled }}</option>
+                                                <option value="no">{{ text_disabled }}</option>
+                                            {% else %}
+                                                <option value="yes">{{ text_enabled }}</option>
+                                                <option value="no" selected="selected">{{ text_disabled }}</option>
+                                            {% endif %}
+                                        </select>
+                                        <p><i class="fa fa-info-circle"></i> {{ help_backup_status }}</p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">{{ text_timezone }}</label>
+                                    <div class="col-sm-5"> 
+                                        <select name="accubackup[Timezone]" class="form-control selectpicker" data-live-search="true">
+                                            {% for option_timezone in option_timezones %}
+                                                {% if timezone == option_timezone %}
+                                                    <option value="{{ option_timezone }}" selected="selected">{{ option_timezone }}</option>
+                                                {% else %}
+                                                    <option value="{{ option_timezone }}">{{ option_timezone }}</option>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </select>
+                                        <p><i class="fa fa-info-circle"></i> {{ help_timezone }}</p>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">{{ entry_how_many }}</label>
+                                    <div class="col-sm-5">
+                                        <select name="accubackup[SaveLimit]" class="form-control">
+                                            {% for i in range(1, option_store_limits) %}
+                                                {% if metaData.SaveLimit == i %}
+                                                    <option value="{{ i }}" selected="selected">{{ i }}</option>
+                                                {% else %}
+                                                    <option value="{{ i }}">{{ i }}</option>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </select>
+                                        <p><i class="fa fa-info-circle"></i> {{ help_save_limit }}</p>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">{{ entry_interval }}</label>
+                                    <div class="col-sm-5"> 
+                                        <select name="accubackup[ScheduleTime]" class="form-control">
+                                            {% for option_schedule in option_schedules %}
+                                                {% if metaData.ScheduleTime == option_schedule.value %}
+                                                    <option value="{{ option_schedule.value }}" selected="selected">{{ option_schedule.text }}</option>
+                                                {% else %}
+                                                    <option value="{{ option_schedule.value }}">{{ option_schedule.text }}</option>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </select>
+                                        <p><i class="fa fa-info-circle"></i> {{ help_interval }}</p>
+                                    </div>
+                                </div>
+
+                                <div class="form-group required">
+                                    <label class="col-sm-2 control-label">{{ entry_backup_type }}</label>
+                                    <div class="col-sm-5">
+                                        <select name="accubackup[ScheduleType]" class="form-control">
+                                            {% if metaData.ScheduleType == 'auto' %}
+                                                <option value="auto" selected="selected">{{ text_auto }}</option>
+                                                <option value="manual">{{ text_manual }}</option>
+                                            {% else %}    
+                                                <option value="auto">{{ text_auto }}</option>
+                                                <option value="manual" selected="selected">{{ text_manual }}</option>
+                                            {% endif %}
+                                        </select>
+                                        <i class="fa fa-info-circle"></i> {{ help_type }}
+
+                                        <div class="cron-url" {% if metaData.ScheduleType == 'auto' %} style="display: none;"{% endif %}><br/>
+                                            <p>{{ help_manual_cron }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div id="tab-backup" class="tab-pane">
+                                <div id="databaseBackupContent"></div>
+                            </div>
+                            <div id="tab-term" class="tab-pane">
+                                {{text_term}}
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    if (window.localStorage && window.localStorage['currentTab']) {
+        $('.menuTabs a[href="' + window.localStorage['currentTab'] + '"]').tab('show');
+    }
+    $('.menuTabs a[data-toggle="tab"]').click(function () {
+        if (window.localStorage) {
+            window.localStorage['currentTab'] = $(this).attr('href');
+        }
+    });
+
+    $('select[name="accubackup[ScheduleType]"]').bind('change', function () {
+        var showOrHide = ($(this).val() == 'auto') ? false : true;
+        $('.cron-url').toggle(showOrHide);
+    });
+
+    $(document).ready(function () {
+        $.ajax({
+            url: "index.php?route=extension/module/accubackup/getDatabaseBackups&user_token={{ userToken }}&page=1",
+            type: 'get',
+            dataType: 'html',
+            success: function (data) {
+                $("#databaseBackupContent").html(data);
+            }
+        });
+    });
+</script>            
+{{ footer }}

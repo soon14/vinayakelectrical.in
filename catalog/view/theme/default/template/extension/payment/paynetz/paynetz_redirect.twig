@@ -1,0 +1,46 @@
+ {{header}}
+<style>
+    #container {
+        background: #FFF !important
+    }
+
+    .paynetz {
+        width: 300px;
+        margin: 0 auto;
+        padding: 44px 0;
+    }
+
+    .paynetz form {
+        margin: 20px 0;
+    }
+
+    .btn.btn-primary {
+        margin-top: 10px;
+    }
+
+    .paynetz img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto
+    }
+
+</style>
+<div id="container" class="container j-container">
+    <div class="paynetz">
+       
+        <img src='image/spinner.gif' style="" />
+        <p style="text-align:center">Redirecting To Atom Paynetz Payment Gateway...</p>
+        <a style="display: none" href="https://www.atomtech.in">Atom Technologies Ltd.</a>
+
+
+
+    </div>
+</div>
+{{footer}}
+<script>
+ 
+        window.location.href="{{ action }}";
+    
+    
+
+</script>

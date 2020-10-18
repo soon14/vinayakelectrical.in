@@ -1,0 +1,66 @@
+<table id="scheduleBackupsTable" class="table table-bordered table-hover" width="100%">
+    <thead>
+        <tr class="table-head">
+            <td class="left" width="25%"><strong class="btn-send" data-placement="left">Filename</strong></td>
+            <td class="left" width="30%"><strong class="btn-send" data-placement="left">Date & Time</strong></td>
+            <td class="left" width="15%"><strong class="btn-send" data-placement="left">Size</strong></td>
+            <td class="center" width="30%"><strong class="btn-send" data-placement="left"></strong>Actions</td>
+        </tr>
+    </thead>
+    {% if backups %}
+        {% for backup in backups %}
+            <tbody>
+                <tr>
+                    <td class="left">{{ backup['filename'] }}</td>
+                    <td class="left">{{ backup.date_created|date("l dS \o\f F Y h:i A", timeZone) }}</td>
+                    <td class="left">{{ backup['size'] }}</td>
+                    <td class="center">
+                        <a href="{{ backup['href'] }}" class="btn btn-sm btn-info"><i class="fa fa-download" aria-hidden="true">&nbsp;&nbsp;Download</i></a>
+                        <a onclick="removeBackup('{{ backup['backup_id'] }}')" class="btn btn-sm btn-danger"><i class="fa fa-trash-o"></i>&nbsp;&nbsp;Remove</a>
+                    </td>
+                </tr>
+            </tbody>
+        {% endfor %}
+    {% else %}
+        <tr><td colspan="10"><div class="center">There are no records yet.</div></td></tr>
+    {% endif %}
+    <tfoot>
+        <tr>
+            <td colspan="10">
+                <div class="row">
+                    <div class="col-sm-6 text-left">{{ pagination }}</div>
+                    <div class="col-sm-6 text-right">{{ results }}</div>
+                </div>
+            </td>
+        </tr>
+    </tfoot>
+</table>
+<script>
+    $(document).ready(function () {
+        $('#scheduleBackupsTable .pagination a').on('click', (function (e) {
+            e.preventDefault();
+            $.ajax({
+                url: this.href,
+                type: 'get',
+                dataType: 'html',
+                success: function (data) {
+                    $("#scheduleBackupsTable").html(data);
+                }
+            });
+        }));
+
+    });
+    function removeBackup(id) {
+        var status = confirm("Are you sure that you want to remove backup?");
+        if (status == true) {
+            $.ajax({
+                url: 'index.php?route=extension/module/accubackup/removeBackup&user_token={{ userToken }}',
+                type: 'post',
+                data: {'backup_id': id},
+                success: function () {
+                    location.reload();
+                }
+            });
+        }
+    }
+</script>
